@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  VITE_API_URL = "https://linkedin-clone-backend.onrender.com/api"
+  VITE_API_URL = "https://social-networking-platform-1.onrender.com/api"
 
 [[redirects]]
   from = "/*"
