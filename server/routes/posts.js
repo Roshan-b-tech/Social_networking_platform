@@ -40,12 +40,7 @@ router.get('/', auth, async (req, res) => {
       mediaData: post.mediaData || ''
     }));
 
-    // Debug logging
-    console.log('Backend sending posts with profile images:', formattedPosts.map(post => ({
-      authorName: post.author.fullName,
-      hasProfileImage: !!post.author.profileImage,
-      profileImageLength: post.author.profileImage ? post.author.profileImage.length : 0
-    })));
+
 
     res.json(formattedPosts);
   } catch (error) {
@@ -101,11 +96,7 @@ router.post('/', auth, async (req, res) => {
   try {
     const { content, mediaData, mediaType } = req.body;
 
-    console.log('Creating post with data:', {
-      content: content?.substring(0, 50) + '...',
-      mediaDataLength: mediaData ? mediaData.length : 0,
-      mediaType: mediaType
-    });
+
 
     if (!content || content.trim().length === 0) {
       return res.status(400).json({ error: 'Post content is required' });
@@ -121,7 +112,7 @@ router.post('/', auth, async (req, res) => {
     await post.save();
     await post.populate('author', 'fullName profileImage');
 
-    console.log('Post saved with mediaData length:', post.mediaData ? post.mediaData.length : 0);
+
 
     res.status(201).json({
       id: post._id,
@@ -175,7 +166,7 @@ router.post('/:postId/like', auth, async (req, res) => {
 
 // Add comment to post
 router.post('/:postId/comments', auth, async (req, res) => {
-  console.log('Add comment route hit:', req.params.postId, req.body);
+
   try {
     const { content } = req.body;
 
@@ -219,7 +210,7 @@ router.post('/:postId/comments', auth, async (req, res) => {
 
 // Get comments for a post
 router.get('/:postId/comments', auth, async (req, res) => {
-  console.log('Get comments route hit:', req.params.postId);
+
   try {
     const post = await Post.findById(req.params.postId)
       .populate('comments.author', 'fullName');
@@ -301,7 +292,7 @@ router.delete('/:postId', auth, async (req, res) => {
 
 // Debug route to catch all unmatched requests
 router.use('*', (req, res) => {
-  console.log('Unmatched route:', req.method, req.originalUrl);
+
   res.status(404).json({ error: 'Route not found' });
 });
 

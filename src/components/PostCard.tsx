@@ -45,12 +45,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const [loading, setLoading] = useState(false)
   const { addNotification } = useNotifications()
 
-  // Debug logging
-  console.log('PostCard received post:', {
-    authorName: post.author.fullName,
-    authorProfileImage: post.author.profileImage ? 'Has image' : 'No image',
-    profileImageLength: post.author.profileImage ? post.author.profileImage.length : 0
-  })
+
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -106,14 +101,14 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
           {/* Media Display */}
           {post.mediaData && post.mediaType && (
             <div className="mb-3">
-              {console.log('Rendering media:', { mediaType: post.mediaType, mediaDataLength: post.mediaData.length })}
+
               {post.mediaType === 'image' ? (
                 <img
                   src={post.mediaData}
                   alt="Post media"
                   className="max-w-full h-64 object-cover rounded-lg"
                   onError={(e) => console.error('Image failed to load:', e)}
-                  onLoad={() => console.log('Image loaded successfully')}
+
                 />
               ) : post.mediaType === 'video' ? (
                 <video
@@ -121,7 +116,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
                   controls
                   className="max-w-full h-64 object-cover rounded-lg"
                   onError={(e) => console.error('Video failed to load:', e)}
-                  onLoad={() => console.log('Video loaded successfully')}
+
                 />
               ) : null}
             </div>

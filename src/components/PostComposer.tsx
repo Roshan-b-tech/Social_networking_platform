@@ -27,11 +27,7 @@ export const PostComposer: React.FC<PostComposerProps> = ({ onPostCreated }) => 
 
     setLoading(true)
     try {
-      console.log('Creating post with media:', {
-        content: content.trim(),
-        mediaData: mediaPreview ? mediaPreview.substring(0, 100) + '...' : 'none',
-        mediaType: mediaFile?.type.startsWith('image/') ? 'image' : mediaFile?.type.startsWith('video/') ? 'video' : ''
-      })
+
 
       const response = await apiClient.createPost(
         content.trim(),
@@ -39,7 +35,7 @@ export const PostComposer: React.FC<PostComposerProps> = ({ onPostCreated }) => 
         mediaFile?.type.startsWith('image/') ? 'image' : mediaFile?.type.startsWith('video/') ? 'video' : ''
       )
 
-      console.log('Post created successfully:', response)
+
 
       if (response.error) {
         console.error('Error creating post:', response.error)

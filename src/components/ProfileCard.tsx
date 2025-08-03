@@ -45,7 +45,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profileId, isOwnProfil
     try {
       if (targetProfileId) {
         const response = await apiClient.getUser(targetProfileId)
-        console.log('Profile fetch response:', response.data)
+
         if (response.data) {
           setProfile(response.data)
           setEditedName(response.data.fullName)
@@ -67,12 +67,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profileId, isOwnProfil
       const profileImageData = profileImagePreview || profile.profileImage
       const bannerImageData = bannerImagePreview || profile.bannerImage
 
-      console.log('Sending profile update:', {
-        fullName: editedName.trim(),
-        bio: editedBio.trim(),
-        profileImageLength: profileImageData ? profileImageData.length : 0,
-        bannerImageLength: bannerImageData ? bannerImageData.length : 0
-      })
+
 
       const response = await apiClient.updateProfile(
         editedName.trim(),
@@ -92,7 +87,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ profileId, isOwnProfil
       }
 
       if (response.data) {
-        console.log('Profile update response:', response.data)
+
         setProfile({
           ...profile,
           fullName: response.data.fullName,

@@ -12,10 +12,7 @@ router.get('/:userId', auth, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    console.log('Backend GET user data:', {
-      profileImageLength: user.profileImage ? user.profileImage.length : 0,
-      bannerImageLength: user.bannerImage ? user.bannerImage.length : 0
-    });
+
 
     res.json({
       id: user._id,
@@ -38,12 +35,7 @@ router.put('/profile', auth, async (req, res) => {
   try {
     const { fullName, bio, profileImage, bannerImage } = req.body;
 
-    console.log('Backend received profile update:', {
-      fullName,
-      bio,
-      profileImageLength: profileImage ? profileImage.length : 0,
-      bannerImageLength: bannerImage ? bannerImage.length : 0
-    });
+
 
     const user = await User.findByIdAndUpdate(
       req.user._id,
@@ -51,10 +43,7 @@ router.put('/profile', auth, async (req, res) => {
       { new: true, runValidators: true }
     ).select('-password');
 
-    console.log('Backend saved user data:', {
-      profileImageLength: user.profileImage ? user.profileImage.length : 0,
-      bannerImageLength: user.bannerImage ? user.bannerImage.length : 0
-    });
+
 
     res.json({
       id: user._id,

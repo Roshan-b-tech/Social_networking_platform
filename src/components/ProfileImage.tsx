@@ -22,13 +22,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
 
     const sizeClass = sizeClasses[size]
 
-    // Debug logging
-    console.log('ProfileImage component:', {
-        fullName,
-        hasProfileImage: !!profileImage,
-        profileImageLength: profileImage ? profileImage.length : 0,
-        size
-    })
+
 
     return (
         <div className={`${sizeClass} rounded-full border-2 border-white shadow-sm overflow-hidden bg-[#0a66c2] flex items-center justify-center ${className}`}>
@@ -38,7 +32,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
                     alt={`${fullName}'s profile`}
                     className="w-full h-full object-cover"
                     onError={(e) => console.error('ProfileImage failed to load:', e)}
-                    onLoad={() => console.log('ProfileImage loaded successfully for:', fullName)}
+
                 />
             ) : (
                 <span className="text-white font-bold">
